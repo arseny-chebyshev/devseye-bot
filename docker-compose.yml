@@ -1,0 +1,17 @@
+version: '3.7'
+services:
+  db:
+    image: postgres
+    container_name: db
+    ports:
+      - 5432:5432
+    env_file:
+      - ./.env
+  bot:
+    image: python
+    container_name: bot
+    volumes:
+      - .:/bot
+    env_file:
+      - ./.env
+    command: [sh, -c, "pip install -r requirements.txt && python bot.py"]
